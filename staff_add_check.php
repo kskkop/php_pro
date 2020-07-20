@@ -1,3 +1,12 @@
+<?php
+
+//共通変数、共通関数読み込み
+require('function.php');
+debug('「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「');
+debug('「スタッフ確認ページ');
+debug('「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「');
+
+?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -7,41 +16,43 @@
     <title>Document</title>
 </head>
 <?php
+    //ポスト送信された値を変数に格納
     $staff_name = $_POST['name'];
     $staff_pass = $_POST['pass'];
     $staff_pass_re = $_POST['pass_re'];
     
-    function h($str){
-        return htmlspecialchars($str,ENT_QUOTES,'UTF-8');
-    }
+    //サニタイズ
     $staff_name = h($staff_name);
     $staff_pass = h($staff_pass);
-    $staff_pass_re = h($staff_pass_re); 
-    if($staff_name == ''){
+    $staff_pass_re = h($staff_pass_re);
+
+    if(empty($staff_name)){
         print 'スタッフ名が入力されていません<br>';
     }else{
         print 'スタッフ名：'.$staff_name.'<br>';
     }
-    if($staff_pass == ''){
+    if(empty($staff_pass)){
         print 'パスワードが入力されていません<br>';
     }
     if($staff_pass !== $staff_pass_re){
         print 'パスワードが一致しません<br>';
     }
         
-    var_dump($staff_name);
+    debug('スタッフ名'.$staff_name);
+    debug('パスワード'.$staff_pass);
+    debug('パスワード再入力'.$staff_pass_re);
 
 ?>
 <body>
 <?php
-    if($staff_name == '' || $staff_pass == '' || $staff_pass != $staff_pass_re){
+    if(empty($staff_name) || empty($staff_pass) || $staff_pass != $staff_pass_re){
 ?>
 <form>
     <input type="button" onclick="history.back()" value="戻る">
 </form>
 <?php
     }else{
-        $staff_pass = md5($staff_pass);
+        $staff_pass = password_hash($staff_pass,PASSWORD_DEFAULT);
 ?>
 <form method="post" action="staff_add_done.php">
     <input type="hidden" name="name" value="'.$staff_name.'">
