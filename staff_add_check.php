@@ -22,9 +22,9 @@ debug('「「「「「「「「「「「「「「「「「「「「「「「「�
     $staff_pass_re = $_POST['pass_re'];
     
     //サニタイズ
-    $staff_name = h($staff_name);
-    $staff_pass = h($staff_pass);
-    $staff_pass_re = h($staff_pass_re);
+    $staff_name = sanitize($staff_name);
+    $staff_pass = sanitize($staff_pass);
+    $staff_pass_re = sanitize($staff_pass_re);
 
     if(empty($staff_name)){
         print 'スタッフ名が入力されていません<br>';
@@ -52,11 +52,11 @@ debug('「「「「「「「「「「「「「「「「「「「「「「「「�
 </form>
 <?php
     }else{
-        $staff_pass = password_hash($staff_pass,PASSWORD_DEFAULT);
+        $staff_pass = password_hash($staff_pass,PASSWORD_DEFAULT);//password_hashは文字数を255にする
 ?>
 <form method="post" action="staff_add_done.php">
-    <input type="hidden" name="name" value="'.$staff_name.'">
-    <input type="hidden" name="pass" value="'.$staff_pass.'">
+    <input type="text" name="name" value="<?php echo $staff_name;?>"><!--hidden 画面に表示されない非表示データを送信することができる-->
+    <input type="text" name="pass" value="<?php echo $staff_pass;?>">
     <br>
     <input type="button" onclick="history.back()" value="戻る">
     <input type="submit" value="OK">
