@@ -1,7 +1,7 @@
 <?php
 
 //共通変数、共通関数読み込み
-require('function.php');
+require('../function.php');
 debug('「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「');
 debug('「スタッフ確認ページ');
 debug('「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「');
@@ -17,6 +17,7 @@ debug('「「「「「「「「「「「「「「「「「「「「「「「「�
 </head>
 <?php
     //ポスト送信された値を変数に格納
+    $staff_code = $_POST['code'];
     $staff_name = $_POST['name'];
     $staff_pass = $_POST['pass'];
     $staff_pass_re = $_POST['pass_re'];
@@ -54,9 +55,10 @@ debug('「「「「「「「「「「「「「「「「「「「「「「「「�
     }else{
         $staff_pass = password_hash($staff_pass,PASSWORD_DEFAULT);//password_hashは文字数を255にする
 ?>
-<form method="post" action="staff_add_done.php">
-    <input type="text" name="name" value="<?php echo $staff_name;?>"><!--hidden 画面に表示されない非表示データを送信することができる-->
-    <input type="text" name="pass" value="<?php echo $staff_pass;?>">
+<form method="post" action="staff_edit_done.php">
+    <input type="hidden" name="code" value="<?php echo $staff_code; ?>">
+    <input type="hidden" name="name" value="<?php echo $staff_name;?>"><!--hidden 画面に表示されない非表示データを送信することができる-->
+    <input type="hidden" name="pass" value="<?php echo $staff_pass;?>">
     <br>
     <input type="button" onclick="history.back()" value="戻る">
     <input type="submit" value="OK">

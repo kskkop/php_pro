@@ -1,5 +1,9 @@
 <?php
-require('function.php');
+require('../function.php');
+debug('「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「');
+debug('「staff_list.php');
+debug('「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「');
+
 try{
     $dsn = 'mysql:dbname=shop;host=localhost;charset=utf8';
     $user = 'root';
@@ -14,7 +18,7 @@ try{
     $dbh = null;
 
     print('スタッフ一覧'.'<br><br>');
-    print('<form method = "post" action = "staff_edit.php">');
+    print('<form method = "post" action = "staff_branch.php">');
     while(true){
         $rec = $stmt->fetch(PDO::FETCH_ASSOC);//$stmtから１レコード取り出し
         if($rec == false){
@@ -25,8 +29,10 @@ try{
         print '<br>';
     }
     
-
-    print '<input type="submit" value="修正">';
+    print '<input type = submit name="disp" value="参照">';
+    print '<input type=submit name="add" value="追加">';
+    print '<input type="submit" name="edit" value="修正">';
+    print '<input type="submit" name="delete" value="削除">';
     print '<br>';
     print '</form>';
 

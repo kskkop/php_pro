@@ -1,8 +1,8 @@
 <?php
 //共通変数、共通関数読み込み
-require('function.php');
+require('../function.php');
 debug('「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「');
-debug('「スタッフ追加ページ');
+debug('「商品追加ページ pro_add.php');
 debug('「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「');
 
 ?>
@@ -15,16 +15,14 @@ debug('「「「「「「「「「「「「「「「「「「「「「「「「�
     <title>Document</title>
 </head>
 <body>
-    スタッフ追加<br><br>
-    <form method="post" action="staff_add_check.php">
-    スタッフ名を入力してください<br>
+    商品追加<br><br>
+    <form method="post" action="pro_add_check.php">
+    商品名を入力してください<br>
     <input type="text" name="name" style="width: 200px;"><br>
-    パスワードを入力してください<br>
-    <input type="password" name="pass" style="width: 100px;"><br>
-    パスワードをもう一度入力してください<br>
-    <input type="password" name="pass_re" style="width:100px;"><br>
+    価格を入力してください<br>
+    <input type="text" name="price" style="width: 100px;"><br>
     <br>
-    <input type="button" onclick="history.back()" value="戻る">
+    <input type="button" onclick=history.back() value="戻る">
     <input type="submit" value="OK">
     </form>
 </body>

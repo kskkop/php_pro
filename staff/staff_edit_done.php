@@ -1,7 +1,7 @@
 <?php
-require('function.php');
+require('../function.php');
 debug('「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「');
-debug('「スタッフ登録ページ');
+debug('「staff_edit_done.php');
 debug('「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「「');
 
 ?>
@@ -17,7 +17,7 @@ debug('「「「「「「「「「「「「「「「「「「「「「「「「�
     <?php
 try
 {
-
+$staff_code = $_POST['code'];
 $staff_name=$_POST['name'];
 $staff_pass=$_POST['pass'];
 
@@ -41,15 +41,11 @@ $options = array(
 
 $dbh=new PDO($dsn,$user,$password);
 
-$sql='INSERT INTO mst_staff (name,password) VALUES (:u_name,:pass)';
-$data = array(':u_name' => $staff_name,':pass' => $staff_pass);
+$sql='UPDATE mst_staff SET name = :u_name, password = :pass WHERE code = :code';
+$data = array(':u_name' => $staff_name,':pass' => $staff_pass,':code' => $staff_code);
 queryPost($dbh,$sql,$data);
 debug($sql);
 $dbh=null;
-
-print $staff_name;
-print 'さんを追加しました。<br />';
-
 }
 catch (Exception $e)
 {
@@ -58,7 +54,7 @@ catch (Exception $e)
 }
 
 ?>
-
+修正しました<br><br>
 <a href="staff_list.php"> 戻る</a>
 </body>
 </html>
